@@ -16,7 +16,7 @@ export default function Warrper({ children }: { children: React.ReactNode }) {
 
   return (
     <div
-      className={classNames("", isSignInOrSignUp ? "h-screen" : "pt-[48px]")}
+      className={classNames("", isSignInOrSignUp ? "h-screen" : "py-[48px]")}
     >
       {user || isSignInOrSignUp ? (
         children

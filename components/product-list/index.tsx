@@ -4,7 +4,7 @@ import SkeletonCard from "../skeleton-card";
 
 export default function ProductList({ products }: { products: Product[] }) {
   return (
-    <div className="mt-10 flex flex-wrap justify-center gap-10">
+    <div className="mt-10 flex flex-wrap  justify-center gap-4 ">
       {products ? (
         products.map((product) => (
           <>

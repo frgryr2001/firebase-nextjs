@@ -4,11 +4,20 @@ import { Button } from "../ui/button";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 
-export default function SearchInput() {
+export default function SearchInput({
+  className,
+  hasButton,
+  isMobile,
+}: {
+  className?: string;
+  hasButton?: boolean;
+  isMobile?: boolean;
+}) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
   const [search, setSearch] = useState<string>("");
+  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -24,19 +33,31 @@ export default function SearchInput() {
     router.push(pathname + "?" + createQueryString("search", value));
   };
 
+  const handleClickSearch = () => {
+    if (isMobile) {
+      setOpenDialog(true);
+    }
+  };
+
   return (
-    <div className="flex gap-2">
+    <div className={className}>
       <Input
         placeholder="Search"
         className="w-[300px]"
         type="search"
+        // onClick={handleClickSearch}
+        onFocus={() => {
+          handleClickSearch();
+        }}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
       />
-      <Button variant="outline" onClick={() => handleSearch(search)}>
-        <AiOutlineSearch />
-      </Button>
+      {hasButton && (
+        <Button variant="outline" onClick={() => handleSearch(search)}>
+          <AiOutlineSearch />
+        </Button>
+      )}
     </div>
   );
 }

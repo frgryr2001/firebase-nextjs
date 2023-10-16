@@ -4,10 +4,17 @@ import Container from "../container";
 import { Button } from "../ui/button";
 import { useAuthStore } from "@/store/useAuthStore";
 import { useRouter } from "next/navigation";
+import SheetHamburger from "../sheet-hamburger";
+import SearchInput from "../search-input";
+import { useMediaQuery } from "react-responsive";
+
+import DiaLog from "../dialog";
+import ToggleDarkMode from "../toggle-dark-mode";
 
 export default function Navigation() {
   const { user, logout, setUser } = useAuthStore();
   const router = useRouter();
+  const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
   const handleLogout = () => {
     logout().then(() => {
       setUser(null);
@@ -19,9 +26,9 @@ export default function Navigation() {
     <>
       {user && (
         <header className="border-white-a08 fixed left-0 top-0 z-20   w-full border-b backdrop-blur-[12px]">
-          <Container className="h-[48px]">
-            <nav className="flex h-full items-center justify-between">
-              <ul className="flex items-center justify-start">
+          <Container className=" flex h-[48px] items-center justify-between px-4 md:px-2 lg:px-0">
+            <nav className=" hidden sm:block">
+              <ul className="flex h-full items-center justify-start">
                 <li className="">
                   <Button asChild variant={"link"}>
                     <Link href="/">Home</Link>
@@ -38,16 +45,15 @@ export default function Navigation() {
                   </Button>
                 </li>
               </ul>
-              <div>
-                <Button
-                  variant={"destructive"}
-                  size="sm"
-                  onClick={handleLogout}
-                >
-                  Sign out
-                </Button>
-              </div>
             </nav>
+            <SheetHamburger className="sm:hidden" />
+            {isMobile && <DiaLog elementTrigger={<SearchInput />} />}
+
+            <div>
+              <Button variant={"destructive"} size="sm" onClick={handleLogout}>
+                Sign out
+              </Button>
+            </div>
           </Container>
         </header>
       )}

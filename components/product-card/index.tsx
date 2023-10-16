@@ -12,10 +12,10 @@ import { Product } from "@/types/product";
 
 export default function ProductCard({ product }: { product: Product }) {
   return (
-    <Card>
+    <Card className="transition-transform hover:scale-105">
       <CardHeader>
         <CardTitle>
-          <div className="w-[300px]">
+          <div className="w-[300px] sm:w-[230px]  md:w-[220px]">
             <AspectRatio ratio={16 / 9} className="bg-muted">
               <Image
                 src={product?.image}

@@ -71,7 +71,7 @@ export default function ProductFilter() {
   return (
     <>
       {/* Filter */}
-      <div className="mt-4 flex gap-5">
+      <div className="mt-4 flex gap-5 ">
         <Select onValueChange={handleSort}>
           <SelectTrigger className="w-[250px]">
             <SelectValue placeholder="Sort" />
@@ -83,7 +83,7 @@ export default function ProductFilter() {
             <SelectItem value="price-asc">Sort by Price (low first)</SelectItem>
           </SelectContent>
         </Select>
-        <SearchInput />
+        <SearchInput className="hidden gap-2 sm:flex" hasButton />
       </div>
 
       <ProductList products={dataSearched} />
