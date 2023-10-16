@@ -62,7 +62,7 @@ export default function CardWithForm({
                 setIsLoading(false);
                 router.push("/");
               })
-              .catch(() => {
+              .catch((err) => {
                 setIsLoading(false);
               })
               .finally(() => {

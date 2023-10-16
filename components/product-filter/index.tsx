@@ -11,6 +11,7 @@ import ProductList from "../product-list";
 import { getProducts } from "@/config/firebase";
 import { Product } from "@/types/product";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import SearchInput from "../search-input";
 
 export default function ProductFilter() {
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function ProductFilter() {
     [searchParams],
   );
   const sort = searchParams.get("sort") || "price-desc";
+  const search = searchParams.get("search") || "";
 
   const handleSort = (value: string) => {
     if (value === "price-desc") {
@@ -57,10 +59,19 @@ export default function ProductFilter() {
     return products;
   }, [sort, products]);
 
+  const dataSearched = useMemo(() => {
+    if (search) {
+      return dataSorted.filter((product) =>
+        product.name.toLowerCase().includes(search.toLowerCase()),
+      );
+    }
+    return dataSorted;
+  }, [search, dataSorted]);
+
   return (
     <>
       {/* Filter */}
-      <div className="flex gap-5">
+      <div className="mt-4 flex gap-5">
         <Select onValueChange={handleSort}>
           <SelectTrigger className="w-[250px]">
             <SelectValue placeholder="Sort" />
@@ -72,9 +83,10 @@ export default function ProductFilter() {
             <SelectItem value="price-asc">Sort by Price (low first)</SelectItem>
           </SelectContent>
         </Select>
+        <SearchInput />
       </div>
 
-      <ProductList products={dataSorted} />
+      <ProductList products={dataSearched} />
     </>
   );
 }

@@ -44,15 +44,14 @@ export const useAuthStore = create<AuthStore>()(
       try {
         get().setIsLoading(true);
         const user = await createAuthUserWithEmailAndPassword(email, password);
-        console.log(user);
 
         if (user) {
           await createUserProfileDocument(user);
         }
         get().setIsLoading(false);
       } catch (error) {
-        console.log(error);
         get().setIsLoading(false);
+        throw error;
       }
     },
     signInAuthUserWithEmailAndPassword: async (
@@ -62,15 +61,14 @@ export const useAuthStore = create<AuthStore>()(
       try {
         get().setIsLoading(true);
         const user = await signInAuthUserWithEmailAndPassword(email, password);
-        console.log(user);
 
         if (user) {
           await createUserProfileDocument(user);
         }
         get().setIsLoading(false);
       } catch (error) {
-        console.log(error);
         get().setIsLoading(false);
+        throw error;
       }
     },
     logout: async () => {

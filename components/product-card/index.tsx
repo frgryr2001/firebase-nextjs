@@ -31,7 +31,7 @@ export default function ProductCard({ product }: { product: Product }) {
         <CardDescription>{product?.description}</CardDescription>
       </CardHeader>
       <CardContent>
-        <p>{product?.name}</p>
+        <h3 className="text-xl font-medium uppercase">{product?.name}</h3>
       </CardContent>
       <CardFooter>
         <p>{product?.price}</p>

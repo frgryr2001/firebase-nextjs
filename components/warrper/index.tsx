@@ -4,9 +4,11 @@ import Loading from "../loading";
 
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
+import React from "react";
 
 export default function Warrper({ children }: { children: React.ReactNode }) {
   const { user } = useAuthStore();
+
   const pathname = usePathname();
 
   const isSignInOrSignUp = pathname === "/signin" || pathname === "/signup";

@@ -18,7 +18,7 @@ type AuthProviderProps = {
   children: React.ReactNode;
 };
 export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const { user, setUser, isLoading, setIsLoading } = useAuthStore();
+  const { user, setUser, isLoading } = useAuthStore();
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (userAuth) => {
@@ -31,7 +31,6 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setUser(null);
         Cookies.remove("token");
       }
-      setIsLoading(false);
     });
 
     return () => unsubscribe();

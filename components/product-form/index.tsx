@@ -98,7 +98,11 @@ export function CreateProductForm() {
             <FormItem>
               <FormLabel>Product name</FormLabel>
               <FormControl>
-                <Input placeholder="product name" {...field} />
+                <Input
+                  placeholder="product name"
+                  {...field}
+                  disabled={isCreating}
+                />
               </FormControl>
 
               <FormMessage />
@@ -113,7 +117,12 @@ export function CreateProductForm() {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input placeholder="price" {...field} type="number" />
+                <Input
+                  placeholder="price"
+                  {...field}
+                  type="number"
+                  disabled={isCreating}
+                />
               </FormControl>
 
               <FormMessage />
@@ -128,7 +137,11 @@ export function CreateProductForm() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input placeholder="Your name" {...field} />
+                <Input
+                  placeholder="Your name"
+                  {...field}
+                  disabled={isCreating}
+                />
               </FormControl>
 
               <FormMessage />
@@ -146,6 +159,7 @@ export function CreateProductForm() {
                   placeholder="image"
                   {...field}
                   type="file"
+                  disabled={isCreating}
                   accept="image/png, image/jpeg"
                   onChange={(e: any) => {
                     setImg(e.target.files[0]);
@@ -158,7 +172,7 @@ export function CreateProductForm() {
           )}
         />
 
-        <Button type="submit">
+        <Button type="submit" disabled={isCreating}>
           {isCreating ? "Creating..." : "Create Product"}
         </Button>
       </form>

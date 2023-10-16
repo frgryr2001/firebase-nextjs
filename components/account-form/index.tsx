@@ -111,7 +111,11 @@ export function AccountForm({ updateData }: { updateData: any }) {
               <FormItem>
                 <FormLabel>Name</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your name" {...field} />
+                  <Input
+                    placeholder="Your name"
+                    {...field}
+                    disabled={isLoadingUpdating}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -126,7 +130,11 @@ export function AccountForm({ updateData }: { updateData: any }) {
               <FormItem>
                 <FormLabel>Phone</FormLabel>
                 <FormControl>
-                  <Input placeholder="Your phone" {...field} />
+                  <Input
+                    placeholder="Your phone"
+                    {...field}
+                    disabled={isLoadingUpdating}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -141,7 +149,11 @@ export function AccountForm({ updateData }: { updateData: any }) {
               <FormItem>
                 <FormLabel>Address</FormLabel>
                 <FormControl>
-                  <Input placeholder="Address" {...field} />
+                  <Input
+                    placeholder="Address"
+                    {...field}
+                    disabled={isLoadingUpdating}
+                  />
                 </FormControl>
 
                 <FormMessage />
@@ -165,6 +177,7 @@ export function AccountForm({ updateData }: { updateData: any }) {
                     onChange={(e: any) => {
                       setImg(e.target.files[0]);
                     }}
+                    disabled={isLoadingUpdating}
                   />
                 </FormControl>
 

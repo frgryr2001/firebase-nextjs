@@ -137,7 +137,11 @@ export const signInAuthUserWithEmailAndPassword = async (
   if (!email || !password) {
     return;
   }
-  return await signInWithEmailAndPassword(auth, email, password);
+  try {
+    return await signInWithEmailAndPassword(auth, email, password);
+  } catch (error: any) {
+    throw new Error("Email or password is incorrect");
+  }
 };
 export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback: () => void) => {
@@ -176,10 +180,18 @@ export const updateProfileDocument = async (uid: string, objUpdate: {}) => {
   if (!uid) {
     return null;
   }
-  await updateDoc(doc(db, "users", uid), {
-    address,
-    fullName,
-    phoneNumber,
-    photoURL,
-  });
+  if (photoURL) {
+    await updateDoc(doc(db, "users", uid), {
+      address,
+      fullName,
+      phoneNumber,
+      photoURL,
+    });
+  } else {
+    await updateDoc(doc(db, "users", uid), {
+      address,
+      fullName,
+      phoneNumber,
+    });
+  }
 };

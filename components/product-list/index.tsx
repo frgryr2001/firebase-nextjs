@@ -7,7 +7,9 @@ export default function ProductList({ products }: { products: Product[] }) {
     <div className="mt-10 flex flex-wrap justify-center gap-10">
       {products ? (
         products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <>
+            <ProductCard key={product.id} product={product} />
+          </>
         ))
       ) : (
         <>

@@ -15,6 +15,8 @@ export default function Navigation() {
     });
   };
 
+  console.log("user", user);
+
   return (
     <>
       {user && (

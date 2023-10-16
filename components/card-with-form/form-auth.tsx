@@ -68,10 +68,13 @@ export default function FormAuth({ type }: FormAuthProps) {
       }
     } catch (error: any) {
       if (error.code === "auth/invalid-login-credentials") {
-        console.log("Invalid login credentials.");
-
         toast({
           description: "Invalid login credentials.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          description: error.message,
           variant: "destructive",
         });
       }
