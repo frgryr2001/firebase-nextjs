@@ -23,18 +23,10 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <AuthProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Warrper>
-              <Navigation />
-              <div className="">{children}</div>
-            </Warrper>
-          </ThemeProvider>
-
+          <Warrper>
+            <Navigation />
+            <div className="">{children}</div>
+          </Warrper>
           <Toaster />
         </AuthProvider>
       </body>
