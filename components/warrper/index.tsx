@@ -1,13 +1,14 @@
 "use client";
-import { useAuthStore } from "@/store/useAuthStore";
+
 import Loading from "../loading";
 
 import { usePathname } from "next/navigation";
 import classNames from "classnames";
 import React from "react";
+import { useAuthContext } from "@/context/auth-context";
 
 export default function Warrper({ children }: { children: React.ReactNode }) {
-  const { user } = useAuthStore();
+  const { user } = useAuthContext();
 
   const pathname = usePathname();
 

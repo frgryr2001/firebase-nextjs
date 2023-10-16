@@ -51,7 +51,13 @@ const defaultValues: Partial<AccountFormValues> = {
   // dob: new Date("2023-01-23"),
 };
 
-export function AccountForm({ updateData }: { updateData: any }) {
+export function AccountForm({
+  updateData,
+  onSuccess,
+}: {
+  updateData: any;
+  onSuccess: () => void;
+}) {
   const { toast } = useToast();
 
   const [isLoadingUpdating, setIsLoadingUpdating] = useState(false);
@@ -81,6 +87,11 @@ export function AccountForm({ updateData }: { updateData: any }) {
         await updateProfileDocument(updateData?.uid, data);
       }
       setIsLoadingUpdating(false);
+      form.reset({
+        avatar: "",
+      });
+      onSuccess();
+
       toast({
         title: "Update account successfully",
       });

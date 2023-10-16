@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 export default function Profile() {
   const user = useAuthStore((state) => state.user);
   const [userDocument, setUserDocument] = useState<any>();
+  const [isUpdated, setIsUpdated] = useState(false);
 
   useEffect(() => {
     if (user) {
@@ -21,11 +22,18 @@ export default function Profile() {
       };
       getUserDocument();
     }
-  }, [user]);
+  }, [user, isUpdated]);
+
+  const onSuccess = () => {
+    setIsUpdated((value) => !value);
+  };
+
   return (
     <Container className="mt-10">
       <div className="mx-auto w-1/2">
-        {userDocument && <AccountForm updateData={userDocument} />}
+        {userDocument && (
+          <AccountForm updateData={userDocument} onSuccess={onSuccess} />
+        )}
       </div>
     </Container>
   );
