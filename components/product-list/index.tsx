@@ -1,6 +1,5 @@
 import { Product } from "@/types/product";
 import ProductCard from "../product-card";
-import SkeletonCard from "../skeleton-card";
 
 export default function ProductList({ products }: { products: Product[] }) {
   return (
@@ -12,14 +11,7 @@ export default function ProductList({ products }: { products: Product[] }) {
           </>
         ))
       ) : (
-        <>
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-          <SkeletonCard />
-        </>
+        <p>Not found product</p>
       )}
     </div>
   );

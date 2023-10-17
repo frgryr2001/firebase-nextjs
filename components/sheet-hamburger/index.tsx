@@ -9,12 +9,18 @@ import {
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import { Button } from "../ui/button";
 import Link from "next/link";
-import SearchInput from "../search-input";
+import { useState } from "react";
 
 export default function SheetHamburger({ className }: { className?: string }) {
+  const [openSheet, setOpenSheet] = useState(false);
   return (
     <>
-      <Sheet>
+      <Sheet
+        open={openSheet}
+        onOpenChange={(value) => {
+          setOpenSheet(value);
+        }}
+      >
         <SheetTrigger className={className}>
           <span>
             <HamburgerMenuIcon />
@@ -27,21 +33,39 @@ export default function SheetHamburger({ className }: { className?: string }) {
               <nav className="w-full">
                 <ul className="flex h-full w-full flex-col">
                   <li className="block w-full">
-                    <Button asChild variant={"ghost"}>
+                    <Button
+                      asChild
+                      variant={"ghost"}
+                      onClick={() => {
+                        setOpenSheet(false);
+                      }}
+                    >
                       <Link href="/" className="w-full">
                         Home
                       </Link>
                     </Button>
                   </li>
                   <li className="">
-                    <Button asChild variant={"ghost"}>
+                    <Button
+                      asChild
+                      variant={"ghost"}
+                      onClick={() => {
+                        setOpenSheet(false);
+                      }}
+                    >
                       <Link href="product" className="w-full">
                         Product
                       </Link>
                     </Button>
                   </li>
                   <li className="">
-                    <Button asChild variant={"ghost"}>
+                    <Button
+                      asChild
+                      variant={"ghost"}
+                      onClick={() => {
+                        setOpenSheet(false);
+                      }}
+                    >
                       <Link href="profile" className="w-full">
                         Profile
                       </Link>

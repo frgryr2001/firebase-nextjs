@@ -10,10 +10,12 @@ import { useMediaQuery } from "react-responsive";
 
 import DiaLog from "../dialog";
 import ToggleDarkMode from "../toggle-dark-mode";
+import { useState } from "react";
 
 export default function Navigation() {
   const { user, logout, setUser } = useAuthStore();
   const router = useRouter();
+
   const isMobile = useMediaQuery({ query: "(max-width: 640px)" });
   const handleLogout = () => {
     logout().then(() => {
@@ -46,10 +48,12 @@ export default function Navigation() {
                 </li>
               </ul>
             </nav>
-            <SheetHamburger className="sm:hidden" />
-            {isMobile && <DiaLog elementTrigger={<SearchInput />} />}
+            <SheetHamburger className="basis-auto sm:hidden" />
+            {isMobile && (
+              <DiaLog elementTrigger={<SearchInput className="flex-1" />} />
+            )}
 
-            <div>
+            <div className="basis-auto ">
               <Button variant={"destructive"} size="sm" onClick={handleLogout}>
                 Sign out
               </Button>

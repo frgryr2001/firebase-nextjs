@@ -31,7 +31,7 @@ export default function CardWithForm({
   const { signInWithGooglePopup } = useAuthStore();
 
   return (
-    <Card className="w-[450px]">
+    <Card>
       <CardHeader>
         <CardTitle className="text-2xl">{title}</CardTitle>
         <CardDescription>

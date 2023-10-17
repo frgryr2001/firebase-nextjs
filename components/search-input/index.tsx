@@ -7,17 +7,16 @@ import { useCallback, useState } from "react";
 export default function SearchInput({
   className,
   hasButton,
-  isMobile,
+  onCLoseDialog,
 }: {
   className?: string;
   hasButton?: boolean;
-  isMobile?: boolean;
+  onCLoseDialog?: () => void;
 }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams()!;
   const [search, setSearch] = useState<string>("");
-  const [openDialog, setOpenDialog] = useState<boolean>(false);
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -30,12 +29,11 @@ export default function SearchInput({
   );
 
   const handleSearch = (value: string) => {
-    router.push(pathname + "?" + createQueryString("search", value));
-  };
+    if (pathname !== "/")
+      router.push("/" + "?" + createQueryString("search", value));
 
-  const handleClickSearch = () => {
-    if (isMobile) {
-      setOpenDialog(true);
+    if (pathname === "/") {
+      router.push(pathname + "?" + createQueryString("search", value));
     }
   };
 
@@ -43,18 +41,20 @@ export default function SearchInput({
     <div className={className}>
       <Input
         placeholder="Search"
-        className="w-[300px]"
+        className="w-full md:w-[300px]"
         type="search"
-        // onClick={handleClickSearch}
-        onFocus={() => {
-          handleClickSearch();
-        }}
         onChange={(e) => {
           setSearch(e.target.value);
         }}
       />
       {hasButton && (
-        <Button variant="outline" onClick={() => handleSearch(search)}>
+        <Button
+          variant="outline"
+          onClick={() => {
+            handleSearch(search);
+            onCLoseDialog && onCLoseDialog();
+          }}
+        >
           <AiOutlineSearch />
         </Button>
       )}

@@ -84,6 +84,11 @@ export function CreateProductForm() {
         toast({
           title: "Product created.",
         });
+      } else {
+        toast({
+          title: "Please select image.",
+          variant: "destructive",
+        });
       }
     } catch (error) {}
   }
@@ -153,7 +158,7 @@ export function CreateProductForm() {
           name="image"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Images</FormLabel>
+              <FormLabel>Image</FormLabel>
               <FormControl>
                 <Input
                   placeholder="image"
